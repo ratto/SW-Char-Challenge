@@ -1,7 +1,11 @@
 <template>
     <div class="d-flex justify-content-center">
         <button @click="GetRandomCharacters" class="btn btn-light">Get characters!</button>
-        
+        <div v-if="listReady">
+            <div class="list-group">
+                <div v-for="character in sw_characters" :key="character.name" class="list-group-item"><button :style="ChangeButtonColor(character.color)">{{ character.name }}</button></div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -13,8 +17,9 @@ export default {
 
     data() {
         return {
+            listReady: false,
             sw_characters: [],
-            character: Object
+            character: Object,
         }
     },
 
@@ -42,7 +47,9 @@ export default {
                 }
             }
             
+            // After setting a 10-character list in sw_characters array, we sort all characters by their names
             this.SortCharacterList();
+            this.listReady = true;
         },
 
         ChangeCharProp(name, color) {
@@ -64,15 +71,27 @@ export default {
 
                 return 0;
             })
-        }
+        },
+
+        ChangeButtonColor(color) {
+            if (color == 'undefined') {
+                return 'color: black'; // there are some "undefined" eye colors on the list, so we paint them in black
+            }
+            else {
+                return 'color: ' + color;
+            }
+        },
     },
 
     computed: {
-        ...mapGetters(['characters'])
+        ...mapGetters(['characters']),
     }
 }
 </script>
 
 <style scoped>
-    
+button {
+    margin: 0.2rem;
+    padding: 0.2rem;
+}
 </style>
