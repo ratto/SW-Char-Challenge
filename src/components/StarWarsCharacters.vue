@@ -1,6 +1,7 @@
 <template>
     <div class="d-flex justify-content-center">
         <button @click="GetRandomCharacters" class="btn btn-light">Get characters!</button>
+        
     </div>
 </template>
 
@@ -39,9 +40,9 @@ export default {
                     this.sw_characters.push(this.character);
                     usedId.push(id);
                 }
-
-                window.console.log(id);
-            }        
+            }
+            
+            this.SortCharacterList();
         },
 
         ChangeCharProp(name, color) {
@@ -49,6 +50,20 @@ export default {
                 'name': name,
                 'color': color
             }
+        }, 
+
+        SortCharacterList() {
+            this.sw_characters.sort(function (a, b) {
+                if(a.name > b.name) {
+                    return 1;
+                }
+
+                if(a.name < b.name) {
+                    return -1;
+                }
+
+                return 0;
+            })
         }
     },
 
