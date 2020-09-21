@@ -3,7 +3,9 @@
         <button @click="GetRandomCharacters" class="btn btn-light">Get characters!</button>
         <div v-if="listReady">
             <div class="list-group">
-                <div v-for="character in sw_characters" :key="character.name" class="list-group-item"><button :style="ChangeButtonColor(character.color)">{{ character.name }}</button></div>
+                <div v-for="character in sw_characters" :key="character.name" class="list-group-item">
+                    <button :style="ChangeButtonColor(character.color)" @click="RemoveFromArray(character.name)">{{ character.name }}</button>
+                </div>
             </div>
         </div>
     </div>
@@ -81,6 +83,21 @@ export default {
                 return 'color: ' + color;
             }
         },
+
+        RemoveFromArray(name) {
+            let objIndex = 0;
+            let i = 0;
+            this.sw_characters.forEach( character => {
+                if(character.name == name) {
+                    objIndex = i;
+                } 
+                else {
+                    i++;
+                }
+            })
+
+            this.sw_characters.splice(objIndex, 1);
+        }
     },
 
     computed: {
