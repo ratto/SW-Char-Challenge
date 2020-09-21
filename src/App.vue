@@ -18,6 +18,7 @@ export default {
     StarWarsCharacters
   },
 
+  // once the app is created, it calls the procedure to store swapi data
   created() {
     this.$store.dispatch('START_CHARACTER_STORE');
   },

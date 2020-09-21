@@ -5,7 +5,7 @@ const state = {
 }
 
 const getters = {
-    characters: state => state.characters
+    characters: state => state.characters,
 }
 
 const mutations = {
@@ -15,11 +15,12 @@ const mutations = {
 }
 
 const actions = {
-    START_CHARACTER_STORE: async({ commit }) => {
+    START_CHARACTER_STORE: async ({ commit }) => {
         let charArray = [];
         let hasNext = true;
         var i = 1;
-
+        
+        // as swapi can't deliver all the characters data, so we call each page that has data on it
         do {
             await Axios.get('https://swapi.dev/api/people/?page=' + i).then((response) => {
                 if (response.data.next != null) {
@@ -43,6 +44,8 @@ const actions = {
 
                     hasNext = false;  
                 }
+            }).catch(function (error) {
+                window.console.log(error);
             })
 
             i++;
@@ -50,15 +53,7 @@ const actions = {
         } while(hasNext);
         
         commit('SET_CHARACTER_STORE', charArray);
-
-        var j = 1;
-        charArray.forEach(character => {
-            window.console.log(j + ', ' + character);
-            j++;
-        })
-
         window.console.log('Success: All characters have been downloaded from swapi!');
-        
     }
 }
 
