@@ -1,22 +1,41 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img id="logo" class="img-fluid" alt="Star Wars" src="./assets/star_wars_logo.jpg">
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <StarWarsCharacters />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import StarWarsCharacters from './components/StarWarsCharacters.vue'
 
 export default {
   name: 'App',
+
   components: {
-    HelloWorld
-  }
+    // HelloWorld
+    StarWarsCharacters
+  },
+
+  created() {
+    this.$store.dispatch('START_CHARACTER_STORE');
+  },
 }
 </script>
 
 <style>
+
+
+body,
+html {
+  background-color: black;
+}
+
+#logo {
+  height: 10rem;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
