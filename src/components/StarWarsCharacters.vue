@@ -1,10 +1,34 @@
 <template>
-    <div class="d-flex justify-content-center">
-        <button @click="GetRandomCharacters" class="btn btn-light">Get characters!</button>
-        <div v-if="listReady">
-            <div class="list-group">
-                <div v-for="character in sw_characters" :key="character.name" class="list-group-item">
-                    <button :style="ChangeButtonColor(character.color)" @click="RemoveFromArray(character.name)">{{ character.name }}</button>
+    <!-- 
+        Nota: optei por utilizar CSS Grid neste exemplo devido à facilidade de posicionamento
+        entre dispositivos, porém, segundo o novo Bootstrap 4 (usado neste exemplo), o ideal é 
+        utilizar o Flexbox. Se houvessem mais elementos DOM, principalmente se houvesse animação 
+        ou sobreposição, teria utilizado o Flexbox ao invés do CSS Grid, que é menos dinâmico.
+     -->
+    <div class="container">
+        <div class="row">        
+            <div class="col-12">
+                <button @click="GetRandomCharacters" class="btn btn-light">Gerar lista de Personagens!</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row justify-content-lg-center" v-if="listReady">
+            <div class="col-4 col-offset-4">
+                <ul>
+                    <li v-for="character in sw_characters" :key="character.name">
+                        <button :style="ChangeButtonColor(character.color)" @click="RemoveFromArray(character.name)" class="btn btn-light">{{ character.name }}</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row justify-content-lg-center" v-if="listReady">
+            <div class="col-4 col-offset-4">
+                <select name="characters" id="characters" v-model="selected">
+                    <option v-for="character in sw_characters" :key="character.name" :value="character.name" :style="ChangeButtonColor(character.color)">{{ character.name }}</option>
+                </select>
+                <div>
+                    <button class="btn btn-info" @click="RemoveFromArray(selected)">Remover selecionado</button>
                 </div>
             </div>
         </div>
@@ -22,11 +46,13 @@ export default {
             listReady: false,
             sw_characters: [],
             character: Object,
+
+            selected: ''
         }
     },
 
     methods: {
-        // after populating the characters data store, we can randomly fetch 10 different characters
+        // after populating the character's data store, we can randomly fetch 10 different characters
         GetRandomCharacters() {
             var usedId = [];
 
@@ -97,7 +123,7 @@ export default {
             })
 
             this.sw_characters.splice(objIndex, 1);
-        }
+        },
     },
 
     computed: {
@@ -109,6 +135,12 @@ export default {
 <style scoped>
 button {
     margin: 0.2rem;
-    padding: 0.2rem;
+    padding: 0.25rem;
+}
+
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 </style>

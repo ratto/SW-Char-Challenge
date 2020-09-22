@@ -10,7 +10,11 @@
   "dependencies": {
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
+    "bootstrap-vue": "^2.17.3",
     "core-js": "^3.6.5",
+    "popper.js": "^1.12.3",
+    "rijs": "^0.9.1",
+    "rijs.npm": "^2.0.0",
     "vue": "^2.6.11",
     "vuex": "^3.5.1"
   },

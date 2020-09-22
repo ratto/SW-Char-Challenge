@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 // import HelloWorld from './components/HelloWorld.vue'
 import StarWarsCharacters from './components/StarWarsCharacters.vue'
 
