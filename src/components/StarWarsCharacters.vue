@@ -54,6 +54,13 @@ export default {
     methods: {
         // after populating the character's data store, we can randomly fetch 10 different characters
         GetRandomCharacters() {
+            // reset sw_characters list (to prevent bug)
+            if(this.sw_characters.length > 0){
+                while(this.sw_characters.length > 0) {
+                    this.sw_characters.pop();
+                }
+            }
+
             var usedId = [];
 
             while(this.sw_characters.length < 10) {
