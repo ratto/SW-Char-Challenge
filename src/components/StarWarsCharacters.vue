@@ -13,7 +13,7 @@
         </div>
         <hr>
         <div class="row justify-content-lg-center" v-if="listReady">
-            <div class="col col-offset-4">
+            <div class="col-4 col-offset-4">
                 <ul>
                     <li v-for="character in sw_characters" :key="character.name">
                         <button :style="ChangeButtonColor(character.color)" @click="RemoveFromArray(character.name)" class="btn btn-light">{{ character.name }}</button>
@@ -23,7 +23,7 @@
         </div>
         <hr>
         <div class="row justify-content-lg-center" v-if="listReady">
-            <div class="col col-offset-4">
+            <div class="col-4 col-offset-4">
                 <select name="characters" id="characters" v-model="selected">
                     <option v-for="character in sw_characters" :key="character.name" :value="character.name" :style="ChangeButtonColor(character.color)">{{ character.name }}</option>
                 </select>
