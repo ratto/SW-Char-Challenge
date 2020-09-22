@@ -13,7 +13,7 @@
         </div>
         <hr>
         <div class="row justify-content-lg-center" v-if="listReady">
-            <div class="col-4 col-offset-4">
+            <div class="col col-offset-4">
                 <ul>
                     <li v-for="character in sw_characters" :key="character.name">
                         <button :style="ChangeButtonColor(character.color)" @click="RemoveFromArray(character.name)" class="btn btn-light">{{ character.name }}</button>
@@ -23,7 +23,7 @@
         </div>
         <hr>
         <div class="row justify-content-lg-center" v-if="listReady">
-            <div class="col-4 col-offset-4">
+            <div class="col col-offset-4">
                 <select name="characters" id="characters" v-model="selected">
                     <option v-for="character in sw_characters" :key="character.name" :value="character.name" :style="ChangeButtonColor(character.color)">{{ character.name }}</option>
                 </select>
@@ -104,6 +104,10 @@ export default {
         ChangeButtonColor(color) {
             if (color == 'undefined') {
                 return 'color: black'; // there are some "undefined" eye colors on the list, so we paint them in black
+            }
+            // some character have white and yellow eyes, so we use a darker background to contrast with the text
+            else if (color == 'white' || color == 'yellow') {
+                return 'background-color: darkgray; color: ' + color;
             }
             else {
                 return 'color: ' + color;
